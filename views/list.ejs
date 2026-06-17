@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <%- include('navbar') %>
+    <h1>Task List</h1>
+
+    <ul>
+        <% list.forEach(i => { %>
+            <div style="border: 1px solid black; width: fit-content;margin: 25px;">
+                <li> <%= i.title %> </li>
+                <li> <%= i.description %> </li>
+                <li> <form action="/delete" method="post"> <input type="hidden" name="id" value="<%= i._id %>"> <input type="submit" value="Mark as done"> </form> </li>
+                <li> 
+                    <form action="/edit" method="post"> 
+                        <input type="hidden" name="id" value="<%= i._id %>"> <br> 
+                        <input type="hidden" name="title" value="<%= i.title %>" id="title"> 
+                        <textarea style="display: none;" name="description" id="description"> <%= i.description %> </textarea> 
+                        <input type="submit" value="Update"> 
+                    </form> 
+                </li>
+            </div>
+        <% }); %>
+        </>
+    </ul>
+
+</body>
+</html>
